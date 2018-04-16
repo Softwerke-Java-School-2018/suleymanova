@@ -1,6 +1,6 @@
 package ru.softwerke.Controller;
 
-import ru.softwerke.Model.DeviseService;
+import ru.softwerke.Model.Service.DeviseService;
 
 import java.time.LocalDate;
 import java.util.Scanner;

@@ -1,7 +1,7 @@
 package ru.softwerke;
 
 
-import ru.softwerke.Model.ClientService;
+import ru.softwerke.Model.Service.ClientService;
 import ru.softwerke.View.Menu;
 
 

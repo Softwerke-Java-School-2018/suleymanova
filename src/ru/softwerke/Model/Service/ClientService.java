@@ -1,4 +1,4 @@
-package ru.softwerke.Model;
+package ru.softwerke.Model.Service;
 
 import ru.softwerke.Model.Class.Client;
 

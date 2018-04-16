@@ -2,7 +2,7 @@ package ru.softwerke.Controller;
 
 
 import java.util.Scanner;
-import ru.softwerke.Model.ClientService;
+import ru.softwerke.Model.Service.ClientService;
 import java.time.LocalDate;
 
 public class AddClientController {
