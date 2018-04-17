@@ -18,8 +18,22 @@ public class ClientService {
     }
 
 
+
+    private long id = 0;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+
+
     public void addNewClient(long id, String firstName, String lastName, LocalDate birthDate){
         clientList.add(Client.createClient(id, firstName, lastName, birthDate));
+        this.id++;
     }
 
     public List<Client> getClientList() {

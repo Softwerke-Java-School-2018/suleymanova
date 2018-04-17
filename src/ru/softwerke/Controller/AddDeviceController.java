@@ -1,19 +1,21 @@
 package ru.softwerke.Controller;
 
-import ru.softwerke.Model.Service.DeviseService;
+import ru.softwerke.Model.Service.DeviceService;
 
 import java.time.LocalDate;
 import java.util.Scanner;
 
 public class AddDeviceController {
-    DeviseService deviseService = DeviseService.getDeviceService();
-    long id = 0;
+    DeviceService deviceService = DeviceService.getDeviceService();
 
-    public DeviseService addNewDevice(){
+
+
+    public DeviceService addNewDevice(){
         Scanner in = new Scanner(System.in);
-        deviseService.addNewDevice(id, in.next(), in.next(), in.next(), in.next(), in.nextBigDecimal(),
-                LocalDate.of(in.nextInt(), in.nextInt(), in.nextInt()));
-        id++;
-        return (deviseService);
+        deviceService.addNewDevice(deviceService.getId(), in.next(), in.next(), in.next(), in.next(),
+                in.nextBigDecimal(), LocalDate.of(in.nextInt(), in.nextInt(), in.nextInt()));
+        return (deviceService);
     }
+
+
 }
