@@ -3,26 +3,25 @@ package ru.softwerke.Model.Class;
 import java.time.LocalDate;
 
 
-
 public class Client {
-    long id;
-    String firstName;
-    String lastName;
-    LocalDate birthDate;
+    private Long id;
+    private String firstName;
+    private String lastName;
+    private LocalDate birthDate;
 
-    public Client(long id, String firstName, String lastName, LocalDate birthDate) {
+    private Client(Long id, String firstName, String lastName, LocalDate birthDate) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
     }
 
-    public static Client createClient(long id, String firstName, String lastName, LocalDate birthDate){
-        return new Client(id, firstName,  lastName, birthDate);
+    public static Client createClient(Long id, String firstName, String lastName, LocalDate birthDate) {
+        return new Client(id, firstName, lastName, birthDate);
     }
 
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
