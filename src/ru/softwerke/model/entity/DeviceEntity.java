@@ -29,6 +29,11 @@ public class DeviceEntity {
         return new DeviceEntity(id, model, manufacturer, colour, deviceType, price, productionDate);
     }
 
+    @Override
+    public String toString() {
+        return ("" + deviceType + " " + manufacturer + " " + model);
+    }
+
     public Long getId() {
         return id;
     }
@@ -81,4 +86,6 @@ public class DeviceEntity {
     public void setPrice(String price) {
         this.price = new BigDecimal(price);
     }
+
+
 }

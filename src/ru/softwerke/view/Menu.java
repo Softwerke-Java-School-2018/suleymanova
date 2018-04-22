@@ -2,11 +2,15 @@ package ru.softwerke.view;
 
 import ru.softwerke.controller.ClientController;
 import ru.softwerke.controller.DeviceController;
+import ru.softwerke.controller.SaleController;
 import ru.softwerke.model.entity.ClientEntity;
 import ru.softwerke.model.entity.DeviceEntity;
+import ru.softwerke.model.entity.SaleEntity;
 import ru.softwerke.model.search.ClientsSearches;
 import ru.softwerke.model.search.DevicesSearches;
 import ru.softwerke.model.service.ClientService;
+import ru.softwerke.model.service.DeviceService;
+import ru.softwerke.model.service.SaleService;
 import ru.softwerke.model.utils.StartClients;
 import ru.softwerke.model.utils.StartDevices;
 
@@ -31,6 +35,9 @@ public class Menu {
 
         ClientsSearches clientsSearches = new ClientsSearches();
         DevicesSearches devicesSearches = new DevicesSearches();
+
+        SaleService saleService = new SaleService();
+        SaleController saleController = new SaleController();
 
         boolean quit = false;
 
@@ -427,7 +434,11 @@ public class Menu {
 
                     Long idOfPerson = in.nextLong();
 
+
+                    System.out.println(SaleController.getClientBuyer(idOfPerson));
+
                     System.out.println("Please, input id of devices, which you want to buy. If you add all, press -1");
+
 
                     boolean quitPurchase = false;
 
@@ -436,14 +447,37 @@ public class Menu {
                         if (idOfDevice == -1) {
                             quitPurchase = true;
                         }
+                        else {
+                            SaleController.setPurchasedDevice(idOfDevice);
+                            System.out.println(SaleController.getInformationAboutPurchasedDevices());
+                            SaleController.amountOfSale();
+                        }
                     } while (!quitPurchase);
 
-                    System.out.println();
+                    System.out.println("Amount of your purchase is: " + SaleController.getAmountOfAllSale());
+
+
+                    SaleController.addInHistoryOfSales(SaleController.getClientBuyer(idOfPerson).substring(0),
+                            SaleController.getPurchasedDevices(), LocalDate.now(),
+                            new BigDecimal(SaleController.getAmountOfAllSale().longValue()));
+
+                    SaleController.clearPurchase();
+                    break;
+
+                case 10:
+
+                    for (SaleEntity saleEntity: SaleController.getHistoryOfSales()){
+                        System.out.println(saleEntity.getClientName() + " " +
+                                saleEntity.getListOfPurchasedDevices() + " " +
+                                saleEntity.getDateOfSale() + " " +
+                                saleEntity.getAmountOfSale());
+                    }
                     break;
 
                 case -1:
                     quit = true;
                     break;
+
                 default:
                     System.out.println("Wrong input, try again");
             }
