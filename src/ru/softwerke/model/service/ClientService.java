@@ -30,6 +30,7 @@ public class ClientService {
 
 
 
+
     private static Comparator<ClientEntity> compareById = new Comparator<ClientEntity>() {
         @Override
         public int compare(ClientEntity o1, ClientEntity o2) {
@@ -94,5 +95,15 @@ public class ClientService {
             clientService = new ClientService();
         }
         return clientService;
+    }
+
+    int indexForDelete;
+    public void deleteClient(Long idOfClient) {
+        for (ClientEntity clientEntity : clientService.getAllClientsList()) {
+            if (clientEntity.getId().equals(idOfClient)) {
+                indexForDelete = clientList.indexOf(clientEntity);
+            }
+        }
+        clientList.remove(indexForDelete);
     }
 }

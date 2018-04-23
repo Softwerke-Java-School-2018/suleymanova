@@ -8,8 +8,6 @@ import ru.softwerke.model.entity.DeviceEntity;
 import ru.softwerke.model.entity.SaleEntity;
 import ru.softwerke.model.search.ClientsSearches;
 import ru.softwerke.model.search.DevicesSearches;
-import ru.softwerke.model.service.ClientService;
-import ru.softwerke.model.service.DeviceService;
 import ru.softwerke.model.service.SaleService;
 import ru.softwerke.model.utils.StartClients;
 import ru.softwerke.model.utils.StartDevices;
@@ -53,6 +51,8 @@ public class Menu {
                     "8) Find a Device \n" +
                     "9) Make a purchase  \n" +
                     "10) Show history of sales \n" +
+                    "11) Change Client Information \n" +
+                    "12) Delete Client \n" +
                     "-1) Exit \n");
 
             switch (in.nextInt()) {
@@ -147,7 +147,7 @@ public class Menu {
                             "2) By model \n" +
                             "3) By Manufacturer \n" +
                             "4) By Colour \n" +
-                            "5) By DeviceEntity Type \n" +
+                            "5) By Device Type \n" +
                             "6) By Price \n" +
                             "7) By Production Date");
 
@@ -308,7 +308,7 @@ public class Menu {
                             String wantedModel = in.next();
                             List<DeviceEntity> wantedDeviceListModel = deviceController.searchByModel(wantedModel);
                             if (wantedDeviceListModel.isEmpty()) {
-                                System.out.println("There are no devices");
+                                System.out.println("There is no device");
                             } else {
                                 System.out.println(String.format("%1$2s %2$10s %3$15s %4$10s %5$15s %6$10s %7$20s",
                                         "id", "model", "Manufacturer", "Colour", "DeviceType",
@@ -328,7 +328,7 @@ public class Menu {
                             String wantedManufacturer = in.next();
                             List<DeviceEntity> wantedDeviceListManufacturer = deviceController.searchByManufacturer(wantedManufacturer);
                             if (wantedDeviceListManufacturer.isEmpty()) {
-                                System.out.println("There no device");
+                                System.out.println("We haven't device made by this manufacturer");
                             } else {
                                 System.out.println(String.format("%1$2s %2$10s %3$15s %4$10s %5$15s %6$10s %7$20s",
                                         "id", "model", "Manufacturer", "Colour", "DeviceType",
@@ -348,7 +348,7 @@ public class Menu {
                             String wantedColour = in.next();
                             List<DeviceEntity> wantedDeviceListColour = deviceController.searchByColour(wantedColour);
                             if (wantedDeviceListColour.isEmpty()) {
-                                System.out.println("There are no devices");
+                                System.out.println("We haven't device with this colour");
                             } else {
                                 System.out.println(String.format("%1$2s %2$10s %3$15s %4$10s %5$15s %6$10s %7$20s",
                                         "id", "model", "Manufacturer", "Colour", "DeviceType",
@@ -368,7 +368,7 @@ public class Menu {
                             String wantedDeviceType = in.next();
                             List<DeviceEntity> wantedDeviceListDeviceType = deviceController.searchByDeviceType(wantedDeviceType);
                             if (wantedDeviceListDeviceType.isEmpty()) {
-                                System.out.println("There are no devices");
+                                System.out.println("There are no this type of device");
                             } else {
                                 System.out.println(String.format("%1$2s %2$10s %3$15s %4$10s %5$15s %6$10s %7$20s",
                                         "id", "model", "Manufacturer", "Colour", "DeviceType",
@@ -406,7 +406,7 @@ public class Menu {
                         case 7:
                             System.out.println("Please, input Production Date ");
                             LocalDate wantedProductionDate = LocalDate.of(in.nextInt(), in.nextInt(), in.nextInt());
-                            List<DeviceEntity> wantedDeviceListProductionDate = deviceController.searchByProductionDate(wantedProductionDate);
+                            List<DeviceEntity> wantedDeviceListProductionDate = DeviceController.searchByProductionDate(wantedProductionDate);
                             if (wantedDeviceListProductionDate.isEmpty()) {
                                 System.out.println("There no device");
                             } else {
@@ -457,7 +457,7 @@ public class Menu {
                     System.out.println("Amount of your purchase is: " + SaleController.getAmountOfAllSale());
 
 
-                    SaleController.addInHistoryOfSales(SaleController.getClientBuyer(idOfPerson).substring(0),
+                    SaleController.addInHistoryOfSales(SaleController.getClientBuyer(idOfPerson),
                             SaleController.getPurchasedDevices(), LocalDate.now(),
                             new BigDecimal(SaleController.getAmountOfAllSale().longValue()));
 
@@ -472,6 +472,41 @@ public class Menu {
                                 saleEntity.getDateOfSale() + " " +
                                 saleEntity.getAmountOfSale());
                     }
+                    break;
+
+                case 11:
+                    System.out.println("Print your id");
+                    Long idChangedPerson = in.nextLong();
+                    System.out.println("What information you want to change?");
+                    System.out.println("1) First name \n" +
+                            "2) Last name \n" +
+                            "3) Birth Date");
+                    List<ClientEntity> clientList = clientController.searchById(idChangedPerson);
+                    switch (in.nextInt()){
+                        case 1:
+                            System.out.println("Write new First Name");
+                            clientList.get(0).setFirstName(in.next());
+                            break;
+                        case 2:
+                            System.out.println("Write new Last Name");
+                            clientList.get(0).setLastName(in.next());
+                            break;
+                        case 3:
+                            System.out.println("Write new Birth Date");
+                            clientList.get(0).setBirthDate(LocalDate.of(in.nextInt(), in.nextInt(), in.nextInt()));
+                            break;
+                        default:
+                            System.out.println("Wrong input");
+                    }
+                    System.out.println(clientList.get(0).getId() + " " +
+                            clientList.get(0).getFirstName() + " " + clientList.get(0).getLastName() + " " +
+                            clientList.get(0).getBirthDate());
+
+
+                    break;
+                case 12:
+                    System.out.println("Print id of Client");
+                    ClientController.deleteClient(in.nextLong());
                     break;
 
                 case -1:

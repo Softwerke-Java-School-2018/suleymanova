@@ -56,6 +56,10 @@ public class ClientController {
         return ClientsSearches.searchByBirthDate(wantedBirthDate);
     }
 
+    public static void deleteClient(Long idOfClient){
+        clientService.deleteClient(idOfClient);
+    }
+
     public List<ClientEntity> getAllClientsList() {
         return this.clientService.getAllClientsList();
     }
