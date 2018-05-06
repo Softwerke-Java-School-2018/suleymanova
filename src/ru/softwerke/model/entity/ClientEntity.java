@@ -11,7 +11,7 @@ public class ClientEntity {
     private String lastName;
     private LocalDate birthDate;
 
-    private ClientEntity(Long id, String firstName, String lastName, LocalDate birthDate) {
+    ClientEntity(Long id, String firstName, String lastName, LocalDate birthDate) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -23,6 +23,10 @@ public class ClientEntity {
     }
 
 
+    @Override
+    public String toString() {
+        return (id + " " + firstName + " " + lastName + " " + birthDate);
+    }
 
     public Long getId() {
         return id;

@@ -31,7 +31,7 @@ public class DeviceEntity {
 
     @Override
     public String toString() {
-        return ("" + deviceType + " " + manufacturer + " " + model);
+        return (deviceType + " " + manufacturer + " " + model + " " + colour + " " + id + " " + price);
     }
 
     public Long getId() {

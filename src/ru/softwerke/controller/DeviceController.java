@@ -1,13 +1,12 @@
 package ru.softwerke.controller;
 
 import ru.softwerke.model.entity.DeviceEntity;
-import ru.softwerke.model.search.DevicesSearches;
 import ru.softwerke.model.service.DeviceService;
+import ru.softwerke.model.search.DeviceSearcher;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Scanner;
 
 public class DeviceController {
     private DeviceService deviceService = DeviceService.getAllDevicesService();
@@ -15,8 +14,8 @@ public class DeviceController {
 
     public void addNewDevice(Long id, String model, String manufacturer, String colour, String deviceType,
                              BigDecimal price, LocalDate productionDate) {
-        Scanner in = new Scanner(System.in);
-        deviceService.addNewDevice(deviceService.getNextDeviceId(), model, manufacturer, colour, deviceType, price, productionDate);
+        deviceService.addNewDevice(deviceService.getNextDeviceId(), model, manufacturer,
+                colour, deviceType, price, productionDate);
     }
 
     public void sortById() {
@@ -55,37 +54,45 @@ public class DeviceController {
     }
 
 
-    public List<DeviceEntity> searchById(Long wantedId){
-        return DevicesSearches.searchById(wantedId);
+    public List<DeviceEntity> searchById(Long wantedId) {
+        return new DeviceSearcher("id").search(DeviceEntity.createDevice(wantedId, null,
+                null, null, null, null, null));
     }
 
-    public List<DeviceEntity> searchByModel(String wantedModel){
-        return DevicesSearches.searchByModel(wantedModel);
+    public List<DeviceEntity> searchByModel(String wantedModel) {
+        return new DeviceSearcher("model").search(DeviceEntity.createDevice(null, wantedModel,
+                null, null, null, null, null));
     }
 
-    public  List<DeviceEntity> searchByManufacturer(String wantedManufacturer){
-        return DevicesSearches.searchByManufacturer(wantedManufacturer);
+    public List<DeviceEntity> searchByManufacturer(String wantedManufacturer) {
+        return new DeviceSearcher("manufacturer").search(DeviceEntity.createDevice(null,
+                null, wantedManufacturer, null, null, null, null));
     }
 
-    public List<DeviceEntity> searchByColour(String wantedColour){
-        return DevicesSearches.searchByColour(wantedColour);
+    public List<DeviceEntity> searchByColour(String wantedColour) {
+        return new DeviceSearcher("colour").search(DeviceEntity.createDevice(null, null,
+                null, wantedColour, null, null, null));
     }
 
-    public List<DeviceEntity> searchByDeviceType(String wantedDeviceType){
-        return DevicesSearches.searchDeviceType(wantedDeviceType);
+    public List<DeviceEntity> searchByDeviceType(String wantedDeviceType) {
+        return new DeviceSearcher("type").search(DeviceEntity.createDevice(null, null,
+                null, null, wantedDeviceType, null, null));
     }
 
-    public List<DeviceEntity> searchByPrice(BigDecimal wantedPrice){
-        return DevicesSearches.searchByPrice(wantedPrice);
+    public List<DeviceEntity> searchByPrice(BigDecimal wantedPrice) {
+        return new DeviceSearcher("price").search(DeviceEntity.createDevice(null, null,
+                null, null, null, wantedPrice, null));
     }
 
-    public static List<DeviceEntity> searchByProductionDate(LocalDate wantedProductionDate){
-        return DevicesSearches.searchByProductionDate(wantedProductionDate);
+    public static List<DeviceEntity> searchByProductionDate(LocalDate wantedProductionDate) {
+        return new DeviceSearcher("productionDate").search(DeviceEntity.createDevice(null, null,
+                null, null, null, null, wantedProductionDate));
     }
 
     public List<DeviceEntity> getAllDevicesList() {
         return DeviceService.getAllDevicesList();
     }
+
     public Long getId() {
         return this.deviceService.getNextDeviceId();
     }

@@ -10,7 +10,8 @@ public class SaleEntity {
     private LocalDate dateOfSale;
     private BigDecimal amountOfSale;
 
-    private SaleEntity(String clientName, List<DeviceEntity> listOfPurchasedDevices, LocalDate dateOfSale, BigDecimal amountOfSale){
+    private SaleEntity(String clientName, List<DeviceEntity> listOfPurchasedDevices,
+                       LocalDate dateOfSale, BigDecimal amountOfSale) {
         this.clientName = clientName;
         this.listOfPurchasedDevices = listOfPurchasedDevices;
         this.dateOfSale = dateOfSale;
@@ -18,7 +19,7 @@ public class SaleEntity {
     }
 
     public static SaleEntity addingInHistoryOfSales(String clientName, List<DeviceEntity> listOfPurchasedDevices,
-                                                 LocalDate dateOfSale, BigDecimal amountOfSale){
+                                                    LocalDate dateOfSale, BigDecimal amountOfSale) {
         return new SaleEntity(clientName, listOfPurchasedDevices, dateOfSale, amountOfSale);
     }
 
@@ -34,7 +35,7 @@ public class SaleEntity {
         return dateOfSale;
     }
 
-    public BigDecimal getAmountOfSale(){
+    public BigDecimal getAmountOfSale() {
         return amountOfSale;
     }
 
@@ -50,7 +51,7 @@ public class SaleEntity {
         this.dateOfSale = dateOfSale;
     }
 
-    public void setAmountOfSale(BigDecimal amountOfSale){
+    public void setAmountOfSale(BigDecimal amountOfSale) {
         this.amountOfSale = amountOfSale;
     }
 }

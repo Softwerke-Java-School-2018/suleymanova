@@ -11,6 +11,7 @@ import java.util.List;
 public class DeviceService {
     private static DeviceService deviceService;
 
+
     private static List<DeviceEntity> deviceList;
 
     private DeviceService() {
@@ -27,54 +28,25 @@ public class DeviceService {
     }
 
 
-    private static Comparator<DeviceEntity> compareById = new Comparator<DeviceEntity>() {
-        @Override
-        public int compare(DeviceEntity o1, DeviceEntity o2) {
-            return o1.getId().compareTo(o2.getId());
-        }
-    };
+    private static Comparator<DeviceEntity> compareById = (o1, o2) -> o1.getId().compareTo(o2.getId());
 
-    private static Comparator<DeviceEntity> compareByModel = new Comparator<DeviceEntity>() {
-        @Override
-        public int compare(DeviceEntity o1, DeviceEntity o2) {
-            return o1.getModel().compareToIgnoreCase(o2.getModel());
-        }
-    };
+    private static Comparator<DeviceEntity> compareByModel = (o1, o2) ->
+            o1.getModel().compareToIgnoreCase(o2.getModel());
 
-    private static Comparator<DeviceEntity> compareByManufacturer = new Comparator<DeviceEntity>() {
-        @Override
-        public int compare(DeviceEntity o1, DeviceEntity o2) {
-            return o1.getManufacturer().compareToIgnoreCase(o2.getManufacturer());
-        }
-    };
+    private static Comparator<DeviceEntity> compareByManufacturer = (o1, o2) ->
+            o1.getManufacturer().compareToIgnoreCase(o2.getManufacturer());
 
-    private static Comparator<DeviceEntity> compareByColour = new Comparator<DeviceEntity>() {
-        @Override
-        public int compare(DeviceEntity o1, DeviceEntity o2) {
-            return o1.getColour().compareToIgnoreCase(o2.getColour());
-        }
-    };
+    private static Comparator<DeviceEntity> compareByColour = (o1, o2) ->
+            o1.getColour().compareToIgnoreCase(o2.getColour());
 
-    private static Comparator<DeviceEntity> compareByDeviceType = new Comparator<DeviceEntity>() {
-        @Override
-        public int compare(DeviceEntity o1, DeviceEntity o2) {
-            return o1.getDeviceType().compareToIgnoreCase(o2.getDeviceType());
-        }
-    };
+    private static Comparator<DeviceEntity> compareByDeviceType = (o1, o2) ->
+            o1.getDeviceType().compareToIgnoreCase(o2.getDeviceType());
 
-    private static Comparator<DeviceEntity> compareByPrice = new Comparator<DeviceEntity>() {
-        @Override
-        public int compare(DeviceEntity o1, DeviceEntity o2) {
-            return o1.getPrice().compareTo(o2.getPrice());
-        }
-    };
+    private static Comparator<DeviceEntity> compareByPrice = (o1, o2) ->
+            o1.getPrice().compareTo(o2.getPrice());
 
-    private static Comparator<DeviceEntity> compareByProductionDate = new Comparator<DeviceEntity>() {
-        @Override
-        public int compare(DeviceEntity o1, DeviceEntity o2) {
-            return o1.getProductionDate().compareTo(o2.getProductionDate());
-        }
-    };
+    private static Comparator<DeviceEntity> compareByProductionDate = (o1, o2) ->
+            o1.getProductionDate().compareTo(o2.getProductionDate());
 
     public static List getAllDevicesSortedById() {
         deviceList.sort(compareById);
@@ -115,8 +87,8 @@ public class DeviceService {
         return nextDeviceId;
     }
 
-    public static List<DeviceEntity> getAllDevicesList() {
-        return deviceList;
+    public static ArrayList<DeviceEntity> getAllDevicesList() {
+        return new ArrayList<>(deviceList);
     }
 
     public static DeviceService getAllDevicesService() {
@@ -124,5 +96,9 @@ public class DeviceService {
             deviceService = new DeviceService();
         }
         return deviceService;
+    }
+
+    public static List<DeviceEntity> getDeviceList() {
+        return deviceList;
     }
 }

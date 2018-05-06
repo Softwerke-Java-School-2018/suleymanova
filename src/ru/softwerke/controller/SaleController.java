@@ -1,5 +1,6 @@
 package ru.softwerke.controller;
 
+import ru.softwerke.model.entity.ClientEntity;
 import ru.softwerke.model.entity.DeviceEntity;
 import ru.softwerke.model.entity.SaleEntity;
 import ru.softwerke.model.service.SaleService;
@@ -13,36 +14,36 @@ public class SaleController {
 
     SaleService saleService = new SaleService();
 
-    public static String getClientBuyer(Long buyerId){
+    public static List<ClientEntity> getClientBuyer(Long buyerId) {
         return SaleService.getClientBuyer(buyerId);
     }
 
-    public static void setPurchasedDevice(Long idOfDevice){
+    public static void setPurchasedDevice(Long idOfDevice) {
         SaleService.setPurchasedDevice(idOfDevice);
     }
 
-    public static String getInformationAboutPurchasedDevices(){
+    public static String getInformationAboutPurchasedDevices() {
         return SaleService.getInformationAboutPurchasedDevices();
     }
 
-    public static void amountOfSale(){
+    public static void amountOfSale() {
         SaleService.amountOfSale();
     }
 
-    public static BigDecimal getAmountOfAllSale(){
+    public static BigDecimal getAmountOfAllSale() {
         return SaleService.getAmountOfAllSale();
     }
 
     public static void addInHistoryOfSales(String clientName, List<DeviceEntity> listOfPurchasedDevices,
-                                      LocalDate dateOfSale, BigDecimal amountOfSale){
+                                           LocalDate dateOfSale, BigDecimal amountOfSale) {
         SaleService.addInHistoryOfSales(clientName, listOfPurchasedDevices, dateOfSale, amountOfSale);
     }
 
-    public static void clearPurchase(){
+    public static void clearPurchase() {
         SaleService.clearPurchase();
     }
 
-    public static ArrayList<DeviceEntity> getPurchasedDevices() {
+    public static List<DeviceEntity> getPurchasedDevices() {
         return SaleService.getPurchasedDevices();
     }
 

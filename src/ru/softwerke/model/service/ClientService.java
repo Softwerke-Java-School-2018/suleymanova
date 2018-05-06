@@ -28,36 +28,17 @@ public class ClientService {
     }
 
 
+    private static Comparator<ClientEntity> compareById = (o1, o2) ->
+            o1.getId().compareTo(o2.getId());
 
+    private static Comparator<ClientEntity> compareByFirstName = (o1, o2) ->
+            o1.getFirstName().compareToIgnoreCase(o2.getFirstName());
 
+    private static Comparator<ClientEntity> compareByLastName = (o1, o2) ->
+            o1.getLastName().compareToIgnoreCase(o2.getLastName());
 
-    private static Comparator<ClientEntity> compareById = new Comparator<ClientEntity>() {
-        @Override
-        public int compare(ClientEntity o1, ClientEntity o2) {
-            return o1.getId().compareTo(o2.getId());
-        }
-    };
-
-    private static Comparator<ClientEntity> compareByFirstName = new Comparator<ClientEntity>() {
-        @Override
-        public int compare(ClientEntity o1, ClientEntity o2) {
-            return o1.getFirstName().compareToIgnoreCase(o2.getFirstName());
-        }
-    };
-
-    private static Comparator<ClientEntity> compareByLastName = new Comparator<ClientEntity>() {
-        @Override
-        public int compare(ClientEntity o1, ClientEntity o2) {
-            return o1.getLastName().compareToIgnoreCase(o2.getLastName());
-        }
-    };
-
-    private static Comparator<ClientEntity> compareByBirthDate = new Comparator<ClientEntity>() {
-        @Override
-        public int compare(ClientEntity o1, ClientEntity o2) {
-            return o1.getBirthDate().compareTo(o2.getBirthDate());
-        }
-    };
+    private static Comparator<ClientEntity> compareByBirthDate = (o1, o2) ->
+            o1.getBirthDate().compareTo(o2.getBirthDate());
 
 
     public List<ClientEntity> getAllClientsList() {
@@ -97,7 +78,8 @@ public class ClientService {
         return clientService;
     }
 
-    int indexForDelete;
+    private int indexForDelete;
+
     public void deleteClient(Long idOfClient) {
         for (ClientEntity clientEntity : clientService.getAllClientsList()) {
             if (clientEntity.getId().equals(idOfClient)) {
@@ -106,4 +88,5 @@ public class ClientService {
         }
         clientList.remove(indexForDelete);
     }
+
 }

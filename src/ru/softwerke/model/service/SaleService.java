@@ -4,12 +4,10 @@ import ru.softwerke.model.entity.ClientEntity;
 import ru.softwerke.model.entity.DeviceEntity;
 import ru.softwerke.model.entity.SaleEntity;
 
-import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
 
 
 public class SaleService {
@@ -30,30 +28,38 @@ public class SaleService {
         historyOfSales = new ArrayList<>();
     }
 
-
-
-    public static String getClientBuyer(Long buyerId){
-        for (ClientEntity clientEntity : clientService.getAllClientsList()){
-            if (clientEntity.getId().equals(buyerId)){
-                clientBuyer.add(clientEntity);
-            }
-        }
-        return clientBuyer.get(0).getFirstName()+ " " + clientBuyer.get(0).getLastName();
+    @Override
+    public String toString() {
+        return clientBuyer.get(0).getFirstName() + " " + clientBuyer.get(0).getLastName();
     }
 
-
+    public static List<ClientEntity> getClientBuyer(Long buyerId) {
+        for (ClientEntity clientEntity : clientService.getAllClientsList()) {
+            if (clientEntity.getId().equals(buyerId)) {
+                clientBuyer.add(clientEntity);
+                break;
+            }
+        }
+        //return clientBuyer.get(0).getFirstName() + " " + clientBuyer.get(0).getLastName();
+        return clientBuyer;
+    }
 
 
     public static void setPurchasedDevice(Long idOfDevice) {
+        List<DeviceEntity> deviceList = DeviceService.getDeviceList();
+        int devIndex = -1;
         for (DeviceEntity deviceEntity : DeviceService.getAllDevicesList()) {
-            long devId = deviceEntity.getId();
+            devIndex++;
             if (deviceEntity.getId().longValue() == idOfDevice.longValue()) {
                 purchasedDevices.add(deviceEntity);
+                deviceList.remove(devIndex);
+                break;
             }
         }
+
     }
 
-    public static String getInformationAboutPurchasedDevices(){
+    public static String getInformationAboutPurchasedDevices() {
 
         return purchasedDevices.get(idOfPurchasedDevice).getDeviceType() + " " +
                 purchasedDevices.get(idOfPurchasedDevice).getManufacturer() + " " +
@@ -62,7 +68,7 @@ public class SaleService {
                 purchasedDevices.get(idOfPurchasedDevice).getPrice();
     }
 
-    public static void amountOfSale(){
+    public static void amountOfSale() {
         amountOfAllSale = amountOfAllSale.add(purchasedDevices.get(idOfPurchasedDevice).getPrice());
         idOfPurchasedDevice++;
     }
@@ -72,24 +78,21 @@ public class SaleService {
     }
 
     public static void addInHistoryOfSales(String clientName, List<DeviceEntity> listOfPurchasedDevices,
-                                           LocalDate dateOfSale, BigDecimal amountOfSale){
+                                           LocalDate dateOfSale, BigDecimal amountOfSale) {
         historyOfSales.add(SaleEntity.addingInHistoryOfSales(clientName, listOfPurchasedDevices, dateOfSale, amountOfSale));
     }
 
-    public static void clearPurchase(){
+    public static void clearPurchase() {
         amountOfAllSale = BigDecimal.ZERO;
         purchasedDevices.clear();
         idOfPurchasedDevice = 0;
         clientBuyer.clear();
     }
 
-    @Override
-    protected Object clone() throws CloneNotSupportedException {
-        return super.clone();
-    }
 
-    public static ArrayList<DeviceEntity> getPurchasedDevices() {
-        return (ArrayList<DeviceEntity> ) purchasedDevices.clone();
+    public static List<DeviceEntity> getPurchasedDevices() {
+
+        return new ArrayList<>(purchasedDevices);
     }
 
     public static List<SaleEntity> getHistoryOfSales() {

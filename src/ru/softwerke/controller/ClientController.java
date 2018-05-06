@@ -4,8 +4,8 @@ package ru.softwerke.controller;
 import java.util.List;
 
 import ru.softwerke.model.entity.ClientEntity;
-import ru.softwerke.model.search.ClientsSearches;
 import ru.softwerke.model.service.ClientService;
+import ru.softwerke.model.search.ClientSearcher;
 
 import java.time.LocalDate;
 
@@ -17,7 +17,6 @@ public class ClientController {
         clientService.addNewClient(clientService.getNextClientId(), firstName, lastName, birthDate);
 
     }
-
 
 
     public void sortById() {
@@ -40,23 +39,28 @@ public class ClientController {
         ClientService.getAllClientsSortedByBirthDay();
     }
 
-    public List<ClientEntity> searchById(Long wantedId){
-        return ClientsSearches.searchById(wantedId);
+    public List<ClientEntity> searchById(Long wantedId) {
+        return new ClientSearcher("id").search(ClientEntity.createClient(wantedId, null,
+                null, null));
     }
 
-    public List<ClientEntity> searchByFirstName(String wantedFirstName){
-        return ClientsSearches.searchByFirstName(wantedFirstName);
+    public List<ClientEntity> searchByFirstName(String wantedFirstName) {
+        return new ClientSearcher("firstName").search(ClientEntity.createClient(null, wantedFirstName,
+                null, null));
     }
 
-    public List<ClientEntity> searchByLastName(String wantedLastName){
-        return ClientsSearches.searchByLastName(wantedLastName);
+    public List<ClientEntity> searchByLastName(String wantedLastName) {
+        //return ClientsSearches.searchByLastName(wantedLastName);
+        return new ClientSearcher("lastName").search(ClientEntity.createClient(null, null,
+                wantedLastName, null));
     }
 
-    public List<ClientEntity> searchByBirthDay(LocalDate wantedBirthDate){
-        return ClientsSearches.searchByBirthDate(wantedBirthDate);
+    public List<ClientEntity> searchByBirthDay(LocalDate wantedBirthDate) {
+        return new ClientSearcher("birthDate").search(ClientEntity.createClient(null, null,
+                null, wantedBirthDate));
     }
 
-    public static void deleteClient(Long idOfClient){
+    public static void deleteClient(Long idOfClient) {
         clientService.deleteClient(idOfClient);
     }
 
