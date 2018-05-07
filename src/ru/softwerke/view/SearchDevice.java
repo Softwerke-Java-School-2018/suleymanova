@@ -69,9 +69,9 @@ public class SearchDevice {
                 break;
         }
 
+        try{
         if (wantedDeviceList.isEmpty()) {
-            System.out.println("There are no device");
-        } else {
+        }
             System.out.println(ConstantsForOutput.MENU_DEVICES);
             for (DeviceEntity deviceEntity : wantedDeviceList) {
                 System.out.println(String.format("%1$2s %2$10s %3$15s %4$10s %5$15s %6$10s %7$20s",
@@ -80,6 +80,8 @@ public class SearchDevice {
                         deviceEntity.getDeviceType(), deviceEntity.getPrice(),
                         deviceEntity.getProductionDate()));
             }
+        } catch (NullPointerException e){
+            System.out.println("Wrong input");
         }
     }
 }

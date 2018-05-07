@@ -14,18 +14,21 @@ public class SaleService {
     private static ClientService clientService = ClientService.getAllClientsService();
     private static DeviceService deviceService = DeviceService.getAllDevicesService();
 
-    private static List<ClientEntity> clientBuyer;
+    private static final List<ClientEntity> clientBuyer;
     private static ArrayList<DeviceEntity> purchasedDevices;
     private static List<SaleEntity> historyOfSales;
 
     private static int idOfPurchasedDevice = 0;
-    private static BigDecimal amountOfAllSale = new BigDecimal(0);
+    private static BigDecimal amountOfAllSale = BigDecimal.ZERO;
 
 
-    public SaleService() {
+    static {
         clientBuyer = new ArrayList<>();
         purchasedDevices = new ArrayList<>();
         historyOfSales = new ArrayList<>();
+    }
+
+    public SaleService() {
     }
 
     @Override
@@ -33,7 +36,9 @@ public class SaleService {
         return clientBuyer.get(0).getFirstName() + " " + clientBuyer.get(0).getLastName();
     }
 
-    public static List<ClientEntity> getClientBuyer(Long buyerId) {
+
+
+    public static List<ClientEntity> clientBuyer(Long buyerId) {
         for (ClientEntity clientEntity : clientService.getAllClientsList()) {
             if (clientEntity.getId().equals(buyerId)) {
                 clientBuyer.add(clientEntity);
@@ -44,6 +49,10 @@ public class SaleService {
         return clientBuyer;
     }
 
+    public static ClientEntity getClientBuyer() {
+        return clientBuyer.get(0);
+
+    }
 
     public static void setPurchasedDevice(Long idOfDevice) {
         List<DeviceEntity> deviceList = DeviceService.getDeviceList();

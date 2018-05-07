@@ -14,8 +14,12 @@ public class SaleController {
 
     SaleService saleService = new SaleService();
 
-    public static List<ClientEntity> getClientBuyer(Long buyerId) {
-        return SaleService.getClientBuyer(buyerId);
+    public static List<ClientEntity> setClientBuyer(Long buyerId) {
+        return SaleService.clientBuyer(buyerId);
+    }
+
+    public static ClientEntity getClientBuyer(){
+        return SaleService.getClientBuyer();
     }
 
     public static void setPurchasedDevice(Long idOfDevice) {
