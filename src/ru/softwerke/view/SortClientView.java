@@ -7,9 +7,15 @@ import ru.softwerke.model.utils.UtilsHelper;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import static java.lang.System.in;
-
 public class SortClientView {
+
+    /**
+     * Method make sort Clients by selected parameter.
+     *
+     * @throws InputMismatchException Thrown by a Scanner to indicate that the token retrieved does not match
+     *                                the pattern for the expected type. If user input wrong type, method will
+     *                                start again.
+     */
     public void sort() {
         ClientController clientController = new ClientController();
         Scanner scanner = UtilsHelper.getScanner();
@@ -33,7 +39,7 @@ public class SortClientView {
 
                         break;
                     case 3:
-                        clientController.sortByLasName();
+                        clientController.sortByLastName();
 
                         break;
                     case 4:

@@ -13,6 +13,16 @@ import java.util.List;
 import java.util.Scanner;
 
 public class PurchaseView {
+
+    /**
+     * Method, which make purchase. User input his id, then id of devices and get amount of purchase.
+     *
+     * @throws InputMismatchException    Thrown by a Scanner to indicate that the token retrieved does not match
+     *                                   the pattern for the expected type. If user input wrong type, method will
+     *                                   start again.
+     * @throws IndexOutOfBoundsException Thrown to indicate that an index is out of range. If user input nonexistent id,
+     *                                   method will start again.
+     */
     public void deal() {
         Scanner scanner = UtilsHelper.getScanner();
         ClientController clientController = new ClientController();

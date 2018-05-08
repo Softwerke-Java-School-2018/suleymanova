@@ -14,7 +14,7 @@ public class ClientService {
 
     private static List<ClientEntity> clientList;
 
-    private ClientService() {
+    public ClientService() {
         clientList = new ArrayList<>();
     }
 

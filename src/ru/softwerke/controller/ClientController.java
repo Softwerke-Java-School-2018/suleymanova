@@ -1,13 +1,12 @@
 package ru.softwerke.controller;
 
 
-import java.util.List;
-
 import ru.softwerke.model.entity.ClientEntity;
-import ru.softwerke.model.service.ClientService;
 import ru.softwerke.model.search.ClientSearcher;
+import ru.softwerke.model.service.ClientService;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class ClientController {
     private static ClientService clientService = ClientService.getAllClientsService();
@@ -29,7 +28,7 @@ public class ClientController {
         ClientService.getAllClientsSortedByFirstName();
     }
 
-    public void sortByLasName() {
+    public void sortByLastName() {
 
         ClientService.getAllClientsSortedByLastName();
     }

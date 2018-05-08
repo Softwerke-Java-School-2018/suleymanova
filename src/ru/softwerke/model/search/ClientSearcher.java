@@ -1,10 +1,8 @@
 package ru.softwerke.model.search;
 
 import ru.softwerke.model.entity.ClientEntity;
-import ru.softwerke.model.search.SearchClient;
 import ru.softwerke.model.service.ClientService;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiPredicate;
@@ -43,8 +41,7 @@ public class ClientSearcher implements SearchClient {
                     return c1.getBirthDate().equals(c2.getBirthDate());
                 };
                 break;
-            default:
-                System.out.println("DASHA POMENYAI");
+
         }
         wantedClientsList = new ArrayList<>();
     }
@@ -60,4 +57,7 @@ public class ClientSearcher implements SearchClient {
         return wantedClientsList;
     }
 
+    public static List<ClientEntity> getWantedClientsList() {
+        return wantedClientsList;
+    }
 }

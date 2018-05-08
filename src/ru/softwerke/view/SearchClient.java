@@ -11,6 +11,7 @@ import java.util.Scanner;
 
 public class SearchClient {
 
+
     public void search() {
         ClientController clientController = new ClientController();
         Scanner scanner = UtilsHelper.getScanner();

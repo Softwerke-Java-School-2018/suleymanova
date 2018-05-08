@@ -11,6 +11,15 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ChangeInformationView {
+    /**
+     * Method, which allows change information about existing user.
+     *
+     * @throws InputMismatchException Thrown by a Scanner to indicate that the token retrieved does not match
+     *                                the pattern for the expected type. If user input wrong type, method will
+     *                                start again.
+     * @throws DateTimeException      This exception is used to indicate problems with creating data-time objects.
+     *                                If user input nonexistent year/month/day, method will start again.
+     */
     public void change() {
         Scanner scanner = UtilsHelper.getScanner();
         ClientController clientController = new ClientController();

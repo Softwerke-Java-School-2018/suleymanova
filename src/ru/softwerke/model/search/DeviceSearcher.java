@@ -1,11 +1,8 @@
 package ru.softwerke.model.search;
 
 import ru.softwerke.model.entity.DeviceEntity;
-import ru.softwerke.model.search.SearchDevice;
 import ru.softwerke.model.service.DeviceService;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiPredicate;
@@ -58,8 +55,7 @@ public class DeviceSearcher implements SearchDevice {
                     return (c1.getProductionDate().equals(c2.getProductionDate()));
                 };
                 break;
-            default:
-                System.out.println("NE ZABIT' EXCEPTION");
+
         }
         wantedDeviceList = new ArrayList<>();
     }

@@ -70,7 +70,7 @@ public class Menu {
                             break;
                         } catch (DateTimeException e) {
                             System.out.println("Wrong input. Please, try again. ");
-                        } catch (InputMismatchException e){
+                        } catch (InputMismatchException e) {
                             System.out.println("Wrong input. Please, try again. ");
                             scanner.next();
                         }
@@ -172,13 +172,13 @@ public class Menu {
 
                 case 12:
                     while (true)
-                    try {
-                        System.out.println("Print id of Client");
-                        ClientController.deleteClient(scanner.nextLong());
-                        break;
-                    } catch (InputMismatchException e) {
-                        System.out.println("Wrong input. please, try again");
-                    }
+                        try {
+                            System.out.println("Print id of Client");
+                            ClientController.deleteClient(scanner.nextLong());
+                            break;
+                        } catch (InputMismatchException e) {
+                            System.out.println("Wrong input. please, try again");
+                        }
                     break;
 
                 case -1:
