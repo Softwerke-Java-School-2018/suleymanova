@@ -1,5 +1,6 @@
 package ru.softwerke.tests;
 
+import org.junit.After;
 import org.junit.jupiter.api.Test;
 import ru.softwerke.model.service.ClientService;
 
@@ -9,6 +10,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ParseDateTest {
     private ClientService testClientService = new ClientService();
+
+    @After
+    public void tearDown() {
+        testClientService = null;
+    }
 
     @Test
     public void testParseDate(){

@@ -1,5 +1,6 @@
 package ru.softwerke.tests;
 
+import org.junit.After;
 import org.junit.jupiter.api.Test;
 import ru.softwerke.controller.ClientController;
 import ru.softwerke.model.search.ClientSearcher;
@@ -13,6 +14,12 @@ public class SearchClientTest {
     private ClientService testClientService = new ClientService();
     private ClientController testClientController = new ClientController();
     private ClientSearcher testClientSearcher = new ClientSearcher();
+
+    @After
+    public void tearDown() {
+        testClientService = null;
+    }
+
     @Test
     public void testSearchClient() {
         testClientService.addNewClient(new Long(1), "Ilya",

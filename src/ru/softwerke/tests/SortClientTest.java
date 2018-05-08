@@ -1,5 +1,6 @@
 package ru.softwerke.tests;
 
+import org.junit.After;
 import org.junit.jupiter.api.Test;
 import ru.softwerke.controller.ClientController;
 import ru.softwerke.model.service.ClientService;
@@ -11,6 +12,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class SortClientTest {
     private ClientService testClientService = new ClientService();
     private ClientController testClientController = new ClientController();
+
+
+    @After
+    public void tearDown() {
+        testClientService = null;
+    }
 
     @Test
     public void testSortClient() {
