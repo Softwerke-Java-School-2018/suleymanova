@@ -24,6 +24,7 @@ public class DeviceEntity {
         this.price = price;
     }
 
+
     public static DeviceEntity createDevice(Long id, String model, String manufacturer, String colour, String deviceType,
                                             BigDecimal price, LocalDate productionDate) {
         return new DeviceEntity(id, model, manufacturer, colour, deviceType, price, productionDate);
