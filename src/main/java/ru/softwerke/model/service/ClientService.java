@@ -12,11 +12,11 @@ public class ClientService {
 
     private static ClientService clientService;
 
-    private static List<ClientEntity> clientList;
+    private static List<ClientEntity> clientList = new ArrayList<>();
 
-    public ClientService() {
+/*    public ClientService() {
         clientList = new ArrayList<>();
-    }
+    }*/
 
 
     private Long nextClientId = 1L;
